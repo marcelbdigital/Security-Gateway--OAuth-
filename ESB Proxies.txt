@@ -1,0 +1,52 @@
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="AuthorizationService" transports="https,http" statistics="disable" trace="disable" startOnLoad="true">
+   <target>
+      <inSequence>
+         <log level="full"/>
+         <bam>
+            <serverProfile name="BAM1">
+               <streamConfig name="user.register.stream" version="1.0.0"/>
+            </serverProfile>
+         </bam>
+      </inSequence>
+      <outSequence>
+         <send/>
+      </outSequence>
+      <endpoint>
+         <address uri="https://localhost:9443/oauth2endpoints/token"/>
+      </endpoint>
+   </target>
+   <description></description>
+</proxy>
+
+
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="OAuth2TokenValidationService" transports="https,http" statistics="disable" trace="disable" startOnLoad="true">
+   <target>
+      <inSequence>
+         <log level="full"/>
+      </inSequence>
+      <outSequence>
+         <send/>
+      </outSequence>
+      <endpoint>
+         <address uri="https://localhost:9443/services/OAuth2TokenValidationService"/>
+      </endpoint>
+   </target>
+   <description></description>
+</proxy>
+
+
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="PreferenceServer" transports="https,http" statistics="disable" trace="disable" startOnLoad="true">
+   <target>
+      <inSequence>
+         <log level="full"/>
+      </inSequence>
+      <outSequence>
+         <send/>
+      </outSequence>
+      <endpoint>
+         <address uri="http://ec2-107-21-143-113.compute-1.amazonaws.com/user/sammy"/>
+      </endpoint>
+   </target>
+   <description></description>
+</proxy>
+             
