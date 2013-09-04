@@ -68,5 +68,11 @@ wso2connections{
 }
 
 
+task('configureOAuth',type: Copy){
+	from 'target/org.wso2.carbon.identity.oauth-4.0.2.jar'
+	into 'src/main/resources/wso2/bam/config'
+}
 
-
+deployWSODistributions.dependsOn{
+	configureOAuth
+}
