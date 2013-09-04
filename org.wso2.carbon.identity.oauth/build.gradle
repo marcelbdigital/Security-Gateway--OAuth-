@@ -51,8 +51,8 @@ artifactory {
 
 
 wso2applications{
-	bam{
-		url="http://dist.wso2.org/products/business-activity-monitor/2.3.0/wso2bam-2.3.0.zip"
+	is{
+		url="http://dist.wso2.org/products/identity-server/4.5.0/wso2is-4.5.0.zip"
 		destination="/home/uolivenza"
 		connectionName="testConnection"
 	}
@@ -62,14 +62,14 @@ wso2connections{
 	testConnection{
 		host='172.20.10.125'
 		user='uolivenza'
-		certificationFile='src/test/resources/wso2/keys/id_dsa'
+		certificationFile='src/main/resources/wso2/keys/id_dsa'
 	}
 }
 
 
 task('configureOAuth',type: Copy){
 	from 'target/org.wso2.carbon.identity.oauth-4.0.2.jar'
-	into 'src/main/resources/wso2/bam/config'
+	into 'src/main/resources/wso2/is/config'
 }
 
 deployWSODistributions.dependsOn{
