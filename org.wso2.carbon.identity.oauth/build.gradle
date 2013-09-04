@@ -1,0 +1,72 @@
+
+group="org.wso2.carbon"
+project.archivesBaseName = 'org.wso2.carbon.identity.oauth'
+version='4.0.2-SNAPSHOT'
+
+buildscript {
+    repositories {
+        maven {
+            url 'http://bcides/artifactory/BDigital-all-common-virtual'
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+        }
+        
+    } 
+    dependencies {
+        classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '2.0.9')
+		classpath(group: 'org.bdigital.gradle.wso2', name: 'WSO2Plugin', version: '1.0.2-SNAPSHOT')
+    }
+}
+
+
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'wso2'
+
+
+allprojects {
+    apply plugin: 'artifactory'
+}
+
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
+    publish {
+        repository {
+            repoKey = 'BDigital-snapshots-local'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = false
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'BDigital-all-common-virtual'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+    }
+}
+
+
+wso2applications{
+	bam{
+		url="http://dist.wso2.org/products/business-activity-monitor/2.3.0/wso2bam-2.3.0.zip"
+		destination="/home/uolivenza"
+		connectionName="testConnection"
+	}
+}
+
+wso2connections{
+	testConnection{
+		host='172.20.10.125'
+		user='uolivenza'
+		certificationFile='src/test/resources/wso2/keys/id_dsa'
+	}
+}
+
+
+
+
