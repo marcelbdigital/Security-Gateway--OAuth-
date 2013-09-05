@@ -23,7 +23,6 @@ buildscript {
 
 apply plugin: 'wso2'
 
-
 allprojects {
     apply plugin: 'artifactory'
 }
