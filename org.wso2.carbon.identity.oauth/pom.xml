@@ -30,12 +30,12 @@
 	<name>WSO2 Carbon - OAuth</name>
 	<description>A custom wso2 products or solution</description>
 	<url>http://wso2.org</url>
-	
-      <repositories> 
+
+	<repositories>  
         <repository> 
             <id>wso2-nexus</id> 
             <name>WSO2 internal Repository</name> 
-            <url>http://bcides/artifactory/wso2-public</url>
+            <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
             <releases> 
                 <enabled>true</enabled> 
                 <updatePolicy>daily</updatePolicy> 
@@ -43,7 +43,7 @@
             </releases> 
         </repository> 
 	</repositories> 
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.wso2.carbon</groupId>
