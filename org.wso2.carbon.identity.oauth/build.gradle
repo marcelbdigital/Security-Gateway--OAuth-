@@ -51,7 +51,7 @@ artifactory {
 
 
 wso2applications{
-	is{
+	identityServer{
 		url="http://dist.wso2.org/products/identity-server/4.5.0/wso2is-4.5.0.zip"
 		destination="/home/uolivenza"
 		connectionName="testConnection"
@@ -72,6 +72,6 @@ task('configureOAuth',type: Copy){
 	into 'src/main/resources/wso2/is/config'
 }
 
-deployWSODistributions.dependsOn{
+deployWSO2Distributions.dependsOn{
 	configureOAuth
 }
