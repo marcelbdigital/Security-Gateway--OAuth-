@@ -16,10 +16,10 @@ buildscript {
     } 
     dependencies {
         classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '2.0.9')
-		classpath(group: 'org.bdigital.gradle.wso2', name: 'WSO2Plugin', version: '1.0.2-SNAPSHOT')
+		classpath(group: 'org.bdigital.gradle.wso2', name: 'WSO2Plugin', version: '1.0.3-SNAPSHOT')
     }
 }
-
+ 
 
 apply plugin: 'wso2'
 
@@ -58,7 +58,7 @@ wso2applications{
 }
 
 wso2connections{
-	testConnection{
+	testConnection{A
 		host='172.20.10.125'
 		user='uolivenza'
 		certificationFile='src/main/resources/wso2/keys/id_dsa'
@@ -68,9 +68,11 @@ wso2connections{
 
 task('configureOAuth',type: Copy){
 	from 'target/org.wso2.carbon.identity.oauth-4.0.2.jar'
-	into 'src/main/resources/wso2/is/config'
+	into 'src/main/resources/wso2/identityServer/config'
 }
 
 deployWSO2Distributions.dependsOn{
 	configureOAuth
 }
+
+
