@@ -65,7 +65,7 @@ wso2connections{
 	testConnection{
 		host='172.20.10.118'
 		user='marcel'
-		certificationFile='src/main/resources/id_dsa'
+		certificationFile='src/main/resources/wso2/id_dsa'
 	}
 }
 
