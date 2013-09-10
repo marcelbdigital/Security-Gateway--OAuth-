@@ -1,0 +1,72 @@
+group="org.bdigital.cloud4all.deployESB"
+project.archivesBaseName = 'DeployESB'
+version='1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        maven {
+            url 'http://bcides/artifactory/BDigital-all-common-virtual'
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }  
+        }
+        
+    } 
+    dependencies {
+        classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '2.0.9')
+		classpath(group: 'org.bdigital.gradle.wso2', name: 'WSO2Plugin', version: '1.0.3-SNAPSHOT') {changing=true}
+    }
+}
+
+configurations.all {
+	resolutionStrategy {
+		cacheDynamicVersionsFor 0, "seconds"
+		cacheChangingModulesFor 0, "seconds"
+	}
+}
+ 
+ 
+apply plugin: 'wso2'
+
+allprojects {
+    apply plugin: 'artifactory'
+}
+
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
+    publish {
+        repository {
+            repoKey = 'BDigital-snapshots-local'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = false
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'BDigital-all-common-virtual'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+    }
+}
+
+wso2applications{
+	esbServer{
+		url="http://dist.wso2.org/products/enterprise-service-bus/4.7.0/wso2esb-4.7.0.zip"
+		destination="/home/marcel/ESB"
+		connectionName="testConnection"
+	}
+}
+
+wso2connections{
+	testConnection{
+		host='172.20.10.118'
+		user='marcel'
+		certificationFile='src/main/resources/id_dsa'
+	}
+}
+
+
